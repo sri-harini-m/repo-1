@@ -1,43 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Play MP4 Video with Sound</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Frontend</title>
 </head>
 <body>
-    <video id="autoplay-video" width="100%" height="500px" autoplay loop playsinline>
-        <source src="test.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+  <video id="video" width="100%" height="500" autoplay muted>
+    <source src="test.mp4" type="video/mp4">
+    Your browser does not support this.
+  </video>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let video = document.getElementById("autoplay-video");
-
-            // Try to autoplay unmuted first
-            video.play().then(() => {
-                console.log("Video autoplayed successfully with sound.");
-            }).catch(error => {
-                console.log("Autoplay blocked by browser, muting video:", error);
-                // Mute the video if autoplay with sound is blocked
-                video.muted = true;
-                video.play().then(() => {
-                    console.log("Video autoplayed muted, waiting for unmute possibility.");
-                    // After a delay, attempt to unmute the video if allowed
-                    setTimeout(() => {
-                        video.muted = false;
-                        video.play().then(() => {
-                            console.log("Video unmuted and playing.");
-                        }).catch(err => {
-                            console.log("Failed to unmute video:", err);
-                        });
-                    }, 2000); // Attempt to unmute after 2 seconds
-                }).catch(err => {
-                    console.log("Autoplay still failed:", err);
-                });
-            });
-        });
-    </script>
+  <script>
+    // Once the page has fully loaded, unmute the video
+    window.onload = function() {
+      var video = document.getElementById('video');
+      // Unmute after a brief delay (100ms) to prevent autoplay block by browsers
+      setTimeout(function() {
+        video.muted = false;
+        video.play(); // Ensure video starts playing if not already
+      }, 100);
+    }
+  </script>
 </body>
 </html>
