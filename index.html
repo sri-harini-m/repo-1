@@ -6,21 +6,16 @@
   <title>Learning Frontend</title>
 </head>
 <body>
-  <video id="video" width="100%" height="500" autoplay muted>
+  <video id="video" width="100%" height="100%">
     <source src="test.mp4" type="video/mp4">
-    Your browser does not support this.
+    Your browser does not support the tag.
   </video>
 
   <script>
-    // Once the page has fully loaded, unmute the video
-    window.onload = function() {
+    document.body.addEventListener('click', function() {
       var video = document.getElementById('video');
-      // Unmute after a brief delay (100ms) to prevent autoplay block by browsers
-      setTimeout(function() {
-        video.muted = false;
-        video.play(); // Ensure video starts playing if not already
-      }, 100);
-    }
+      video.play();
+    });
   </script>
 </body>
 </html>
